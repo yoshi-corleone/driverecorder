@@ -1,0 +1,10 @@
+{% extends "editor/base.html" %}
+
+{% block content %}
+    <h1>コース作成</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input type="submit" value="コース作成">
+    </form>
+{% endblock content %}

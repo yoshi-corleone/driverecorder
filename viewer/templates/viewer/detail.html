@@ -1,0 +1,51 @@
+{% load static %}
+
+<script type="text/javascript">
+    function initMap() {
+        var request = {
+            origin: new google.maps.LatLng({{ start.latitude }}, {{ start.longitude }}),
+            destination: new google.maps.LatLng({{ end.latitude }} ,{{ end.longitude }}),
+            waypoints: [
+                {% for waypoint in waypoints %}
+                    { location: new google.maps.LatLng({{ waypoint.latitude }}, {{ waypoint.longitude }}) },
+                {% endfor %}
+            ],
+            travelMode: google.maps.DirectionsTravelMode.DRIVING,
+        };
+
+        // マップの生成
+        var map = new google.maps.Map(document.getElementById("map"), {
+            center: new google.maps.LatLng(35.681382,139.766084),
+            zoom: 7
+        });
+
+        var d = new google.maps.DirectionsService();
+        var r = new google.maps.DirectionsRenderer({
+            map: map,
+            preserveViewport: true,
+        });
+        d.route(request, function(result, status){
+            if (status == google.maps.DirectionsStatus.OK) {
+                r.setDirections(result);
+            }
+        });
+    }
+</script>
+
+{{ course.name }}
+<table>
+{% for point in points %}
+    <tr>
+        <td>{{ point.latitude }}</td>
+        <td>{{ point.longitude }}</td>
+        <td>{{ point.time }}</td>
+        <td>{{ point.picture.file_name }}</td>
+    </tr>
+{% endfor %}
+</table>
+<div id="map" style="width:740px; height:400px;"></div>
+<a href="{% url 'viewer:index' %}">戻る</a>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap"></script>
+
+

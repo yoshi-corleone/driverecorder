@@ -1,0 +1,10 @@
+{% extends "recorder/base.html" %}
+
+{% block content %}
+    <h1>アップローダー</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" accept="image/jpeg">
+        <input type="submit" value="アップロード">
+    </form>
+{% endblock content %}

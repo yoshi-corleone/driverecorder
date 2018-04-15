@@ -1,0 +1,13 @@
+<h1>コース一覧</h1>
+{% if course_list %}
+    <ul>
+    {% for course in course_list %}
+        <li><a href="/{{ course.id }}/">{{ course.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No courses are available.</p>
+{% endif %}
+<br>
+<a href="{% url 'editor:form' %}">コース作成</a><br>
+<a href="{% url 'recorder:form' %}">写真アップロード</a>
