@@ -1,4 +1,7 @@
+{% extends 'base.html' %}
 {% load static %}
+
+{% block content %}
 
 <script type="text/javascript">
     function initMap() {
@@ -32,20 +35,28 @@
     }
 </script>
 
-{{ course.name }}
+<h1>{{ course.name }}</h1>
 <table>
+    <tr>
+        <th>ファイル名</th>
+        <th>緯度</th>
+        <th>経度</th>
+        <th>撮影日時</th>
+    </tr>
 {% for point in points %}
     <tr>
+        <td>{{ point.picture.file_name }}</td>
         <td>{{ point.latitude }}</td>
         <td>{{ point.longitude }}</td>
         <td>{{ point.time }}</td>
-        <td>{{ point.picture.file_name }}</td>
     </tr>
 {% endfor %}
 </table>
-<div id="map" style="width:740px; height:400px;"></div>
+<div id="map" style="width:800px; height:400px;"></div>
 <a href="{% url 'viewer:index' %}">戻る</a>
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap"></script>
+
+{% endblock %}
 
 

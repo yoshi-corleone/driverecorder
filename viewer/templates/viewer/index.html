@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1>コース一覧</h1>
 {% if course_list %}
     <ul>
@@ -11,3 +15,5 @@
 <br>
 <a href="{% url 'editor:form' %}">コース作成</a><br>
 <a href="{% url 'recorder:form' %}">写真アップロード</a>
+
+{% endblock %}
