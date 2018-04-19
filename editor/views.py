@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from recorder.models import Point
 from .models import Course
 from .forms import CourseForm
 
 
+@login_required
 def form(request):
     # フォームからの POST でない場合（普通にアクセスされた場合）はフォームを返して終了
     if request.method != 'POST':
@@ -23,4 +25,5 @@ def form(request):
         # Course に Point を関連付け
         course.points.add(point_object)
     course.save()
+    # 保存後、viewer アプリのインデックスへリダイレクト
     return redirect('viewer:index')

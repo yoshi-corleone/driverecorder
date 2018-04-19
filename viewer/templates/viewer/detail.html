@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}コース詳細{% endblock %}
+
 {% block content %}
 
 <script type="text/javascript">
@@ -38,20 +40,23 @@
 <h1>{{ course.name }}</h1>
 <table>
     <tr>
+        <th>No.</th>
         <th>ファイル名</th>
         <th>緯度</th>
         <th>経度</th>
         <th>撮影日時</th>
     </tr>
-{% for point in points %}
-    <tr>
-        <td>{{ point.picture.file_name }}</td>
-        <td>{{ point.latitude }}</td>
-        <td>{{ point.longitude }}</td>
-        <td>{{ point.time }}</td>
-    </tr>
-{% endfor %}
+    {% for point in points %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ point.picture.file_name }}</td>
+            <td>{{ point.latitude }}</td>
+            <td>{{ point.longitude }}</td>
+            <td>{{ point.time }}</td>
+        </tr>
+    {% endfor %}
 </table>
+
 <div id="map" style="width:800px; height:400px;"></div>
 <a href="{% url 'viewer:index' %}">戻る</a>
 

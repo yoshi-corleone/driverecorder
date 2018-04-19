@@ -20,8 +20,8 @@ class DetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         # 対象コースを取得
         course = self.object
-        # 対象コースと関連づけられている Point を取得
-        points = course.points.all()
+        # 対象コースと関連づけられている Point を撮影日時の昇順で取得
+        points = course.points.all().order_by('time')
         # Point のリスト
         context['points'] = points
         # 出発地点と到着地点

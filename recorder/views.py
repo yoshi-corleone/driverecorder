@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Point, Picture
 from .jpeg import Jpeg
 import os
@@ -6,6 +7,7 @@ import datetime
 UPLOADED_DIR = os.path.dirname(os.path.abspath(__file__)) + '/static/files/'
 
 
+@login_required
 def form(request):
     # フォームからの POST でない場合（普通にアクセスされた場合）はフォームを返して終了
     if request.method != 'POST':
@@ -50,6 +52,7 @@ def form(request):
     return redirect('recorder:complete')
 
 
+@login_required
 def complete(request):
     return render(request, 'recorder/complete.html')
 
