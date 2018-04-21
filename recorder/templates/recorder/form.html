@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}アップローダー{% endblock %}
+{% block title %}写真アップロード{% endblock %}
 
 {% block content %}
 
-    <h1>アップローダー</h1>
+    <h1>写真アップロード</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="file" accept="image/jpeg">

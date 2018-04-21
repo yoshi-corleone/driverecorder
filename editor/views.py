@@ -20,7 +20,7 @@ def form(request):
     # チェックされた項目をリストで取得
     points = request.POST.getlist('points')
     for point in points:
-        # point はただの数値（ID）なので、これを使用して DB より Point の　レコードを取得
+        # point はただの数値（ID）なので、これを使用して DB より Point のレコードを取得
         point_object = Point.objects.get(id=point)
         # Course に Point を関連付け
         course.points.add(point_object)
